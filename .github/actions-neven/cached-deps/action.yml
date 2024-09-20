@@ -24,5 +24,5 @@ runs:
       if: steps.cache.outputs.cache-hit != 'true' || inputs.caching-nev != 'true' #cache-hit is defined output of cache@v3
       run: |
         npm ci
-        echo "cache:'${{ inputs.caching-nev }}'" >> $GITHUB_OUTPUT
+        echo "cache='${{ inputs.caching-nev }}'">>$GITHUB_OUTPUT
       shell: bash #extra setting koji smo dodali kad smo izradili composit action i kad koristimo run key. Kad koristimo drugi action kao npr actions/cache@v3 onda ne moramo dodati shell key
