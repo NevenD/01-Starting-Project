@@ -11,6 +11,8 @@ jobs:
         uses: actions/checkout@v3
       - name: Load & cache dependecies
         uses: ./.github/actions-neven/cached-deps #ne trebamo dodati /actions zato jer ce github automatski pronaći yml datoteku zato jer smo je nazvali actions
+        with:
+          caching-nev: 'false'
       - name: Lint code
         run: npm run lint
   test:

@@ -1,15 +1,21 @@
 name: 'Get & Cache Dependecies'
 description: 'Get the dependecies (via NPM) and cache them.'
+inputs:
+  caching-nev: #može biti bilo koje ime
+    description: 'Whether to cache dependencies or not'
+    required: false #ako je false, u tom slučaju uzima defaultnu vrijednost
+    default: 'true'
 runs:
   using: 'composite' #mora biti composite
   steps:
     - name: Cache dependencies
+      if: inputs.caching-nev == 'true'
       id: cache
       uses: actions/cache@v3
       with:
         path: node_modules
         key: deps-node-modules-${{ hashFiles('**/package-lock.json') }}
     - name: Install dependencies
-      if: steps.cache.outputs.cache-hit != 'true' #cache-hit is defined output of cache@v3
+      if: steps.cache.outputs.cache-hit != 'true' || inputs.caching-nev != 'true' #cache-hit is defined output of cache@v3
       run: npm ci
       shell: bash #extra setting koji smo dodali kad smo izradili composit action i kad koristimo run key. Kad koristimo drugi action kao npr actions/cache@v3 onda ne moramo dodati shell key
