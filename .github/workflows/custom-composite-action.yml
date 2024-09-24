@@ -63,7 +63,7 @@ jobs:
       - name: Output contents
         run: ls
       - name: Deploy site
-        uses: ./.github/actions/deploy-s3-javascript
+        uses: ./.github/actions-neven/deploy-s3-javascript
         env:
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }} #it has to be named like AWS_ACCESS_KEY_ID
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }} #it has to be named like AWS_SECRET_ACCESS_KEY
